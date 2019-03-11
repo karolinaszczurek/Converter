@@ -45,7 +45,7 @@ class App extends Component {
 
     validate = () => {
         const errors = {};
-        const { from, to, value } = this.state.form; //assign
+        const {from, to, value} = this.state.form; //assign
 
         if (!isNumber(from)) {
             errors['from'] = 'This must be a number'
@@ -63,9 +63,14 @@ class App extends Component {
             errors['to'] = ''
         }
 
-        errors['value'] = (!isNumber(value)) ? 'This must be a number' : '';
 
-        this.setState({ errors: errors });
+        // if (isNaN(value)){
+        //     errors['value'] = 'Wrong value'
+        // } else {
+        //     errors['value'] = ''
+        // }
+
+        this.setState({errors: errors});
 
         for (const key in errors) {
             if (errors[key] !== '') {
@@ -77,23 +82,31 @@ class App extends Component {
 
     render() {
         return (
-            <div>
-                <form onSubmit={this.handleSubmit}>
-                    <label htmlFor="from"> from
+            <div className='main-container'>
+                <h1>Numerical system converter</h1>
+                <div className='app-container'>
+                    <form className='main-form' onSubmit={this.handleSubmit}>
+                        <label className='inputs-label' htmlFor="from"> From</label>
                         <input id="from" type="text" name="from" onChange={this.handleChange}/>
-                        <span style={{color: "red"}}> {this.state.errors.from}</span>
-                    </label>
-                    <label htmlFor="to">to
+                        <div className='error-container'>
+                            <span style={{color: "red"}}> {this.state.errors.from}</span>
+                        </div>
+                        <label htmlFor="to">To</label>
                         <input id="to" type="text" name="to" onChange={this.handleChange}/>
-                        <span style={{color: "red"}}> {this.state.errors.to}</span>
-                    </label>
-                    <label htmlFor="value">value
+                        <div className='error-container'>
+                            <span style={{color: "red"}}> {this.state.errors.to}</span>
+                        </div>
+                        <label htmlFor="value">Value</label>
                         <input id="value" type="text" name="value" onChange={this.handleChange}/>
-                        <span style={{color: "red"}}> {this.state.errors.value}</span>
-                    </label>
-                    <button type="submit">Convert</button>
-                </form>
-                <span>{this.state.result}</span>
+                        <div className='error-container'>
+                            <span style={{color: "red"}}> {this.state.errors.value}</span>
+                        </div>
+                        <button type="submit">Convert</button>
+                    </form>
+                </div>
+                <div className='result-container'>
+                    <span><strong>{this.state.result}</strong></span>
+                </div>
             </div>
         );
     }
