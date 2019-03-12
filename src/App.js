@@ -64,11 +64,11 @@ class App extends Component {
         }
 
 
-        // if (isNaN(value)){
-        //     errors['value'] = 'Wrong value'
-        // } else {
-        //     errors['value'] = ''
-        // }
+        if (isNaN(value) && from < 10){
+            errors['value'] = 'Wrong value'
+        } else {
+            errors['value'] = ''
+        }
 
         this.setState({errors: errors});
 
@@ -87,19 +87,19 @@ class App extends Component {
                 <div className='app-container'>
                     <form className='main-form' onSubmit={this.handleSubmit}>
                         <label className='inputs-label' htmlFor="from"> From</label>
-                        <input id="from" type="text" name="from" onChange={this.handleChange}/>
+                        <input id="from" type="text" name="from" autocomplete="off" onChange={this.handleChange}/>
                         <div className='error-container'>
-                            <span style={{color: "red"}}> {this.state.errors.from}</span>
+                            <span> {this.state.errors.from}</span>
                         </div>
                         <label htmlFor="to">To</label>
-                        <input id="to" type="text" name="to" onChange={this.handleChange}/>
+                        <input id="to" type="text" name="to" autocomplete="off" onChange={this.handleChange}/>
                         <div className='error-container'>
-                            <span style={{color: "red"}}> {this.state.errors.to}</span>
+                            <span> {this.state.errors.to}</span>
                         </div>
                         <label htmlFor="value">Value</label>
-                        <input id="value" type="text" name="value" onChange={this.handleChange}/>
+                        <input id="value" type="text" name="value" autocomplete="off" onChange={this.handleChange}/>
                         <div className='error-container'>
-                            <span style={{color: "red"}}> {this.state.errors.value}</span>
+                            <span> {this.state.errors.value}</span>
                         </div>
                         <button type="submit">Convert</button>
                     </form>
@@ -113,3 +113,4 @@ class App extends Component {
 }
 
 export default App;
+
